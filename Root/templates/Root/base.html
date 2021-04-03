@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>ChatApp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'RootCSS/main.css' %}">
+</head>
+<body>
+    <style type="text/css">
+        .main{
+            min-height: 100vh;
+            height: 100%;
+        }
+    </style>
+    <header>
+        {% include 'Root/navbar.html' %}
+    </header>
+    <!-- body -->
+    <div class="main">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    {% include 'Root/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
