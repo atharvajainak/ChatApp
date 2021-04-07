@@ -6,6 +6,7 @@
 1. Clone the repo
 2. Activate your virtual environment (Recommended)
 3. Run >>> pip install -r requirements.txt
+4. Redis should be running on port 6379
 </br>
 </br>
 
