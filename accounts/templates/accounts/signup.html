@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SignUp</title>
+</head>
+<body>
+    <div style="margin-left: 45px;">
+        <form action="." method="post"> {% csrf_token %}
+            <fieldset>
+                <legend>Signup</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <div>
+                <button type="submit">SignUp</button>
+            </div>
+        </form>
+        <div>
+            <small>
+                Already Have An Account? <a href="{% url 'login' %}">Log In</a>
+            </small>
+        </div>
+    </div>
+</body>
+</html>
