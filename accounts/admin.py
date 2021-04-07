@@ -13,7 +13,8 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields' : ('email', 'username', 'position', 'password')}),
-        ('Permissions', {'fields' : ('is_admin', 'is_creater')})
+        ('Permissions', {'fields' : ('is_admin', 'is_creater')}),
+        ('Info', {'fields' : readonly_fields})
     )
 
     search_fields = ('email', 'username')
