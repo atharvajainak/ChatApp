@@ -39,8 +39,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    
-
 
 class User(AbstractBaseUser):
     email = models.EmailField(
@@ -95,3 +93,11 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_info = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} profile'
