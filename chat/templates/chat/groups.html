@@ -1,0 +1,29 @@
+{% extends 'Root/base.html' %}
+
+{% block content %}
+<style type="text/css">
+    .groups_container {
+        display: grid;
+    }
+
+    .groups_container .group_icon {
+        display: inline;
+        width: 30vh;
+        height: 20vh;
+        border: 2px solid black;
+        margin: 20px 20px;
+    }
+
+</style>
+
+<h1>{{ user.username }}</h1>
+
+<div class="groups_container">
+    {% for group in groups %}
+    <div class="group_icon">
+        <h1>{{ group.group_name }}</h1>
+        <a href="{% url 'selected_group' group.group_name %}">Click here</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

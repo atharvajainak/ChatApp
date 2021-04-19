@@ -21,13 +21,14 @@ from django.urls import path, include
 from accounts import views as account_views
 from chat import views as chat_views
 
-
 urlpatterns = [
     path('', include('Root.urls')),
     path('admin/', admin.site.urls),
     path('signup/', account_views.signup_view, name='signup'),
     path('login/', account_views.login_view, name='login'),
     path('logout/', account_views.logout_view, name='logout'),
+    path('groups/', chat_views.groups, name='groups'),
+    path('<str:grp_name>/', chat_views.selected_group, name='selected_group'),
     path('chat/', include('chat.urls'))
 ]
 

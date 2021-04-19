@@ -1,0 +1,14 @@
+{% extends 'Root/base.html' %}
+
+{% block content %}
+
+<h1>Group: {{ grp_name }}</h1>
+<input type="button" value="Click to Chat" id="btn">
+<script>
+    const btn = document.getElementById("btn");
+    btn.onclick = () => {
+        var roomName =  '{{ grp_name }}';
+        window.location.pathname = '/chat/' + roomName + '/';
+    }
+</script>
+{% endblock %}
