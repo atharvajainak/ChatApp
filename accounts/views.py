@@ -17,7 +17,7 @@ def signup_view(request):
     return render(request, 'accounts/signup.html', {'form':form})
 
 def login_view(request):
-    next = request.GET.get('next')
+    next = request.POST.get('next')
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
         user_obj = form.cleaned_data.get('user_obj')

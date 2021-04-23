@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
             password = password
         )
         user.is_admin = True
-        user.is_creater = True
+        user.is_creator = True
         user.save(using=self._db)
         return user
 
@@ -70,7 +70,7 @@ class User(AbstractBaseUser):
         auto_now_add=True
     )
     is_admin = models.BooleanField(default=False)
-    is_creater = models.BooleanField(default=False)
+    is_creator = models.BooleanField(default=False)
 
     objects = UserManager()
 

@@ -2,13 +2,26 @@
 
 {% block content %}
 
-<h1>Group: {{ grp_name }}</h1>
+<h1>Group: {{ group.group_name }}</h1>
+<p>Creator: {{ creator }}</p>
+<div>
+    <h4>Users:</h4>
+    {% for usr in members_list %}
+        <p>{{ usr.username }}</p>
+    {% endfor %}
+</div>
 <input type="button" value="Click to Chat" id="btn">
+<input type="button" value="members" id="members">
 <script>
     const btn = document.getElementById("btn");
     btn.onclick = () => {
-        var roomName =  '{{ grp_name }}';
+        var roomName =  '{{ group.group_name }}';
         window.location.pathname = '/chat/' + roomName + '/';
     }
+    const btn2 = document.getElementById("members");
+    btn2.onclick = () => {
+        window.location.pathname = '{{ group.group_name }}' + '/members/';
+    }
+    
 </script>
 {% endblock %}

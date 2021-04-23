@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/', account_views.logout_view, name='logout'),
     path('groups/', chat_views.groups, name='groups'),
     path('<str:grp_name>/', chat_views.selected_group, name='selected_group'),
+    path('<str:grp_name>/members/', chat_views.group_members, name='group_members'),
     path('chat/', include('chat.urls'))
 ]
 

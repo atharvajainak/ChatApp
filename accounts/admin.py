@@ -7,13 +7,13 @@ from .forms import UserCreationForm
 class UserAdmin(BaseUserAdmin):
     add_form = UserCreationForm
     
-    list_display = ('username', 'email', 'position', 'is_admin', 'is_creater')
+    list_display = ('username', 'email', 'position', 'is_admin', 'is_creator')
     list_filter = ('is_admin',)
     readonly_fields = ('id', 'date_joined', 'last_login')
 
     fieldsets = (
         (None, {'fields' : ('email', 'username', 'position', 'password')}),
-        ('Permissions', {'fields' : ('is_admin', 'is_creater')}),
+        ('Permissions', {'fields' : ('is_admin', 'is_creator')}),
         ('Info', {'fields' : readonly_fields})
     )
 

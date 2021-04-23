@@ -1,0 +1,30 @@
+{% extends 'Root/base.html' %}
+
+{% block content %}
+<h1>members:</h1>
+<p>Creator: {{ user.username }}</p>
+<form action="." method="POST"> {% csrf_token %}
+    <input type="hidden" name="flag" value="-1"> <!-- flag for remove members -->
+    <div>
+        {% for usr in members_list %}
+            <input type="checkbox" name="remove_users" value="{{ usr.id }}">{{ usr.username }}</br>
+        {% endfor %}
+    </div>
+    <input type="submit" value="Remove Members">
+    <input type="reset" value="Reset">
+</form>
+
+
+<h1>Add Members:</h1>
+<form action="." method="POST"> {% csrf_token %}
+    <input type="hidden" name="flag" value="1"> <!-- flag for add members -->
+    <div>
+        {% for usr in users_list %}
+            <input type="checkbox" name="add_users" value="{{ usr.id }}">{{ usr.username }}</br>
+        {% endfor %}
+    </div>
+    <input type="submit" value="Add members">
+    <input type="reset" value="Reset">
+</form>
+
+{% endblock %}

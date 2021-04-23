@@ -25,5 +25,29 @@
         <a href="{% url 'selected_group' group.group_name %}">Click here</a>
     </div>
     {% endfor %}
+    <h1>Your groups</h1>
+    {% for group in created_groups %}
+    <div class="group_icon">
+        <h1>{{ group.group_name }}</h1>
+        <a href="{% url 'selected_group' group.group_name %}">Click here</a>
+    </div>
+    {% endfor %}
+
+    <div>
+        <form action="." method="post"> {% csrf_token %}
+            <legend><h1>Create Group</h1></legend>
+            <fieldset>
+                {{ form.as_p }}
+            </fieldset>
+            <div>
+                <button type="submit">Create</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+
+<script>
+    const is_creator = ('{{ is_creator }}' == 'true')
+</script>
 {% endblock %}
