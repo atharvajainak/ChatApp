@@ -95,6 +95,11 @@ def group_members(request, grp_name):
 
 @login_required
 def room(request, room_name):
+    try:
+        group = request.user.groups_created.get(group_name=room_name)
+    except Group.DoesNotExist:
+        raise Http404("Group Does not exist or You are not a creator of this group")
+
     return render(request, 'chat/room.html', {
         'room_name': room_name
     })
