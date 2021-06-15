@@ -1,48 +1,144 @@
 {% extends 'Root/base.html' %}
-
+{% load static %}
 {% block content %}
 <style type="text/css">
-    .groups_container {
-        display: grid;
-    }
+p {
+    padding: 10px;
+}
 
-    .groups_container .group_icon {
-        display: inline;
-        width: 30vh;
-        height: 20vh;
-        border: 2px solid black;
-        margin: 20px 20px;
-    }
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-row-gap: 20px;
+    grid-column-gap: 10px;
+    width: 90vw;
+    margin: 0 auto;
+    list-style: none;
+}
+.container a{
+    font-weight: 500;
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+    background-color: rgb(214, 214, 209);
+    height: 200px;
+    min-width: 200px;
+    margin: 10px;
+    padding: 0;
+    border: 1px solid black;
+}
 
+.container a .item {
+    width:inherit;
+    height: inherit;
+    padding: 10px;
+    overflow-y: hidden;
+    overflow-wrap: break-word;
+    margin: 0;
+    padding: 0;
+}
+
+.container a .item p {
+    margin: 5px;
+    width:inherit;
+    padding: 50px 1px;
+    text-align: center;
+}
+
+#toggle-groups{
+    display: none;
+    float: right;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+#created-groups {
+    display: none;
+}
+
+#form-btn{
+    margin: 10px;
+}
+
+#error-div ul li {
+	list-style-type: none;
+	color: crimson;
+}
+
+.group-header {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+fieldset p input {
+    width: 100%;
+}
+fieldset p textarea {
+    width: 100%;
+}
 </style>
 
-<h1>{{ user.username }}</h1>
 
-<div class="groups_container">
-    {% for group in groups %}
-    <div class="group_icon">
-        <h1>{{ group.group_name }}</h1>
-        <a href="{% url 'selected_group' group.group_name %}">Click here</a>
+<div id="toggle-groups">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"/>
+        <label class="form-check-label" for="flexSwitchCheckDefault">
+            Toggle to see created groups
+        </label>
     </div>
-    {% endfor %}
-    <h1>Your groups</h1>
-    {% for group in created_groups %}
-    <div class="group_icon">
-        <h1>{{ group.group_name }}</h1>
-        <a href="{% url 'selected_group' group.group_name %}">Click here</a>
-    </div>
-    {% endfor %}
+</div>
 
-    <div>
-        <form action="." method="post"> {% csrf_token %}
-            <legend><h1>Create Group</h1></legend>
-            <fieldset>
-                {{ form.as_p }}
-            </fieldset>
-            <div>
-                <button type="submit">Create</button>
+<div id="error-div">
+    <p></p>
+</div>
+
+<div id="all-groups">
+    <p class="group-header">Your groups</p>
+    <div class="container" >
+        {% for group in groups %}
+        <a href="{% url 'selected_group' group.group_name %}">
+            <div class="item">
+                <p>{{ group.group_name }}</p>
             </div>
-        </form>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<div id="created-groups">
+    <p class="group-header">Groups created by you</p>
+    <div class="container">
+        {% for group in created_groups %}
+        <a href="{% url 'selected_group' group.group_name %}">
+            <div class="item">
+                <p>{{ group.group_name }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="form-btn">Create Group</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="staticBackdropLabel">Create Group</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="." method="post"> {% csrf_token %}
+                        <fieldset>
+                            {{ form.as_p }}
+                        </fieldset>
+                        <div>
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -50,4 +146,5 @@
 <script>
     const is_creator = ('{{ is_creator }}' == 'true')
 </script>
+<script src="{% static 'js/groups.js'%}"></script>
 {% endblock %}
